@@ -18,6 +18,6 @@ class TestSimpleNumber < Test::Unit::TestCase
 
   def test_drive_out_of_bounds
     data = ["3 3", "0 0 N", "MMMRMMMLMMM"]	  
-    assert_equal([3, 3], drive(start(data), data[2])) 
+    assert_equal([6, 3], drive(start(data), data[2])) 
   end  
 end

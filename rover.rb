@@ -1,4 +1,8 @@
+require_relative 'validator'
+require_relative 'engine'
 
+include RoverData
+include Engine
 
 verbose=true
 display=false
@@ -21,8 +25,19 @@ end
 
 instructions = nil
 if File.exist? ARGV[0]
-  File.open(ARGV[0], 'r') {|f| instrucitons = readlines}
+  File.open(ARGV[0], 'r') {|f| instructions = readlines}
 else
   usage	
 end
+
+if is_consistent? instructions
+  puts "Rover received well formed instuctions from Command Centre! Starting Engine ..." unless !verbose
+  engine = start(instructions)
+  drive(engine, instructions[2])
+  if verbose
+    puts "########################"  
+    puts "# Ended up at #{engine.location} #{engine.direction} #"
+    puts "########################"
+  end
+end	
 

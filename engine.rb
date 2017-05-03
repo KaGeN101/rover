@@ -19,12 +19,24 @@ class Terrian
       case @direction
         when 'N'
           @current_row += 1
+	  #if @current_row == @rows
+          #  @current_row -= 1
+	  #end  
 	when 'E'
 	  @current_col += 1
+	  #if @curent_col == @cols
+	  #  @current_col -= 1
+          #end	    	  
         when 'S'
           @current_row -= 1
+	  #if @current_row == -1
+          #  @current_row = 0
+          #end	    
         when 'W'
-          @current_col -= 1	
+          @current_col -= 1
+          #if @current_col == -1
+	  #  @current_col = 0
+          #end	    
       end	   	  
     else
       if command == 'R'
@@ -67,7 +79,7 @@ module Engine
       puts "Executing instruction: #{command}" unless !verbose
       engine.execute command
       if verbose
-        puts "I am now at location: #{engine.location}"
+        puts "Rover is now at location: #{engine.location} #{engine.direction}"
         sleep 1.5
       end	
     end
