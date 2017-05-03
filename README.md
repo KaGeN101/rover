@@ -3,7 +3,9 @@
 
 ### Introduction
 This is a simple terrain walker in the form of a rover on Mars. It comes in many formats the earliest being Logo.
-Since there was no funtional language on the list and due to Ruby's morphability I decided to write it in a pure funtional Ruby format.
+It has a variation where there is a a map with terrain markers and parts you cannot walk on.
+Since there was no functional language options on the list and due to Ruby's morphability,
+I decided to write it in a pure Functional Ruby format.
 This problem can easily be modeled in an OO methodoly but thought it would be more fun in a functional specification.
 
 ### Operational
