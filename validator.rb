@@ -1,5 +1,7 @@
 module RoverData
 
+  # Validates that the instructions matches the specifications
+  # The contract being inforced here means all other code can just operate on well formed specfication	
   def is_consistent? instructions
     raise "Instructions cannot be nil" unless instructions
     # Checks the instructions and returns it if valid
@@ -22,7 +24,7 @@ module RoverData
         puts "Grid size not in the right format must be 'x y'"	
       end	
     else
-      puts "Instructions set does nto have the correct length"      
+      puts "Instructions set does not have the correct length"      
     end      	    
   end  
 
