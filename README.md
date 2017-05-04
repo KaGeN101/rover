@@ -50,7 +50,7 @@ it will most probably just get stuck in a conner eventaully and never go beyond 
 This is and ultimate fail safe even if you keep sending commands to it.
 
 ### Testing
-Each funtion has a has a unit test in the tests folder.
+Each exposed function has a has a unit test in the tests folder. 
 Most of the modules where coded in a TDD fashion to make it fun. But the order of this is immeterial, as long as all the test run before the coding is done. 
 To run the tests simply execute this command, I run this on Ubuntu:
 `find tests/ -name 'test_*' | xargs -n1 -I{} ruby -Itest {}`
