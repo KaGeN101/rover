@@ -45,5 +45,7 @@ if is_consistent? instructions
   puts "########################"  
   puts "# Ended up at #{engine.location} #{engine.direction} #"
   puts "########################"
+else
+  puts "Data not consistant! Good bye"    	
 end	
 
