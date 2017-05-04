@@ -20,30 +20,40 @@ If you want to switch of verbosity simply pass the -l option false. This will ma
 `ruby rover.rb PATH_TO_INSTRUCTION_SET -l=false`
 
 ### Design
- - The Rover checks if a file is received and instructions
+The grid start at 1,1 it the bottom left conner. Below is a 3x3 and the Rover at positon `1 2 E`
+```
+    N
+  1 2 3 
+ 3
+W2>    E
+ 1
+    S
+```
+
+#### Psuedo
+ - The Rover checks if a file is received with instructions it retrieves
  - It then send the data received for validation. This insures that all logic after this acts on contractually sound data
- - If that passes if send the instruction set to the Engine
- - The Engine configures starts at the initial location on the Terrain
+ - If that passes it sends the instruction set to start the Engine
+ - The Engine configures and starts at the initial location on the Terrain
  - It then begins to excute its instructions an drive the set one command at a time
 
 Since you only need to know where you end up there is no need to move in a datastructure, like a 2d array. One can just move across the rows and columns
-depending on you direction.
+depending on your direction.
 Also the direction is done with switching so you dont have to have logic that knows what comes after a certain directional point. You can switch directions
-up or down depending on if you need to go Left or Right.
+index up or down depending on if you need to go Forward, Backward, Left or Right.
+In general terms East and West moves forward and backward in columns, and North and South forward and backwars in rows.
 
-In general terms E and W moves forward and backward in columns, and North and South forward and backwars in rows.
-
-TODO:
+#### Fails safe
 The rover will never go outside of it defined zone, if commands want to go over a boundary the rover will not move beyond the boundary and will ignore that command.
-It then try the next command and either move back or along the boundary. If you keep making commands beyomnd the boundary direcion,
+It then tries the next command and either move back or along the boundary. If you keep making commands beyond the boundary direcion,
 it will most probably just get stuck in a conner eventaully and never go beyond that point. 
-This is and ultimate failsafe even if you keep sending commands to it.
+This is and ultimate fail safe even if you keep sending commands to it.
 
 ### Testing
 Each funtion has a has a unit test in the tests folder.
 Most of the modules where coded in a TDD fashion to make it fun. But the order of this is immeterial, as long as all the test run before the coding is done. 
-To run the tests simpy go:
+To run the tests simply execute this command, I run this on Ubuntu:
+`find tests/ -name 'test_*' | xargs -n1 -I{} ruby -Itest {}`
 
-
-I have also aadded a functional in in test_instructions.bla. The output of this should be [3, 3]
- 
+I have also added a functional test test_instructions.bla. The output of this should be [4, 4] S, after driving up down each colomn.
+The original problem is also in the file original_instructions.bla. This should give the output [3, 3] S 

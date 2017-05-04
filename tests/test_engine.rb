@@ -6,18 +6,18 @@ class TestSimpleNumber < Test::Unit::TestCase
   
 
   def test_start_engine
-    data = ["3 3", "0 0 N", "MMRMRMMLMLMM"]	  
-    assert_equal([0, 0], start(data).location)
+    data = ["3 3", "1 1 N", "MMRMRMMLMLMM"]	  
+    assert_equal([1, 1], start(data).location)
     assert_equal('N', start(data).direction) 
   end
 
   def test_drive
-    data = ["3 3", "0 0 N", "MMRMRMMLMLMM"]	  
-    assert_equal([2, 2], drive(start(data), data[2])) 
+    data = ["3 3", "1 1 N", "MMRMRMMLMLMM"]	  
+    assert_equal([3, 3], drive(start(data, false), data[2], false)) 
   end
 
   def test_drive_out_of_bounds
-    data = ["3 3", "0 0 N", "MMMRMMMLMMM"]	  
-    assert_equal([6, 3], drive(start(data), data[2])) 
+    data = ["3 3", "1 1 N", "MMMRMMMLMMM"]	  
+    assert_equal([3, 3], drive(start(data, false), data[2], false)) 
   end  
 end
