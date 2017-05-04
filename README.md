@@ -8,6 +8,10 @@ Since there was no functional language options on the list and due to Ruby's mor
 I decided to write it in a pure Functional Ruby format.
 This problem can easily be modeled in an OO methodoly but thought it would be more fun in a functional specification.
 
+My Environment is:
+ - Ruby 2.2.1p85 on
+ - Ubuntu 16.04 LTS
+
 ### Operational
 To run the program simply do:
 `ruby rover.rb PATH_TO_INSTRUCTION_SET`
@@ -15,7 +19,7 @@ OPTIONS:
  - -l       Verbose, the default for this is true
 
 The program will respond with and error state or the final location on success. It will be verbose by default. 
-This cann be disabled if you just want to run through the program as fast as possible.
+This can be disabled if you just want to run through the program as fast as possible.
 If you want to switch of verbosity simply pass the -l option false. This will make the program run an non pausing speed and just show the result
 `ruby rover.rb PATH_TO_INSTRUCTION_SET -l=false`
 
@@ -46,7 +50,7 @@ In general terms East and West moves forward and backward in columns, and North 
 #### Fails safe
 The rover will never go outside of it defined zone, if commands want to go over a boundary the rover will not move beyond the boundary and will ignore that command.
 It then tries the next command and either move back or along the boundary. If you keep making commands beyond the boundary direcion,
-it will most probably just get stuck in a conner eventaully and never go beyond that point. 
+it will most probably just get stuck in a corner eventaully and never go beyond that point. 
 This is and ultimate fail safe even if you keep sending commands to it.
 
 ### Testing
