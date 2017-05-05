@@ -24,8 +24,8 @@ module Engine
   # This is the only port that is not done functional and has a state on instantiation
   # It is private to this module so from an access perspective the Engine module is just two functions
   class Terrian
-   
-    attr_reader :rows, :cols, :current_row, :current_col, :direction 
+  
+    attr_reader :direction
 
     # Don't think you need a datastructure to track where you are you can just move on the plane	
     def initialize grid_size, initial
@@ -38,51 +38,70 @@ module Engine
       @direction_index = @direction_switch.index @direction
     end
 
-    def execute command
-      if command == 'M'
-        case @direction
-          when 'N'
-            @current_row += 1
-	    if @current_row > @rows
-              @current_row = @rows
-	    end  
-	  when 'E'
-	    @current_col += 1
-	    if @current_col > @cols
-	      @current_col = @cols
-            end	    	  
-          when 'S'
-            @current_row -= 1
-	    if @current_row < 1
-              @current_row = 1
-            end	    
-          when 'W'
-            @current_col -= 1
-            if @current_col < 1
-	      @current_col = 1
-            end	    
-        end	   	  
-      else
-        if command == 'R'
-          @direction_index += 1
-	  if @direction_index == @direction_switch.length
-            @direction_index = 0
-          end
-          @direction = @direction_switch[@direction_index]	
-        end
-        if command == 'L'
-          @direction_index -= 1
-          if @direction_index == -1
-	    @drection_index = @direction_switch.length - 1
-          end
-          @direction = @direction_switch[@direction_index]	
-        end	      
-      end
-    end	  
-
     def location
-      [@current_row, @current_col]
-    end    
+      [@current_col, @current_row]
+    end   
+
+    def execute command
+      if command == 'M'	    
+        return move
+      end	
+      turn(command)
+    end
+
+    private
+
+    def move
+      move_n unless @direction != 'N'
+      move_e unless @direction != 'E'
+      move_s unless @direction != 'S'
+      move_w unless @direction != 'W'      
+    end
+
+    def move_n
+      @current_row += 1	    
+      @current_row = check_boundary @current_row, '>', @rows	    
+    end
+    def move_e
+      @current_col += 1
+      @current_col = check_boundary @current_col, '>', @cols      
+    end
+    def move_s
+      @current_row -= 1
+      @current_row = check_boundary @current_row, '<', 1       
+    end
+    def move_w
+      @current_col -= 1
+      @current_col = check_boundary @current_col, '<', 1      
+    end	    
+
+    def check_boundary lhs, op, rhs
+      if lhs.send(op, rhs)
+        return rhs
+      end
+      return lhs      
+    end	    
+  
+    def turn command
+      turn_r unless command != 'R'
+      turn_l unless command != 'L'
+    end	    
+
+    def turn_r
+      @direction_index += 1
+      if @direction_index == @direction_switch.length
+        @direction_index = 0
+      end
+      @direction = @direction_switch[@direction_index]      
+    end	    
+    
+    def turn_l
+      @direction_index -= 1
+      if @direction_index == -1
+	@drection_index = @direction_switch.length - 1
+      end
+      @direction = @direction_switch[@direction_index]    
+    end
 
   end  
 
